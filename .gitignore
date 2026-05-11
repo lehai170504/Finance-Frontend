@@ -19,6 +19,8 @@
 
 # production
 /build
+/dist
+app_icon_*.png
 
 # misc
 .DS_Store
