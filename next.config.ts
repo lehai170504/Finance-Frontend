@@ -8,9 +8,11 @@ const withPWA = withPWAInit({
   register: true,
 });
 
-// Cấu hình Next.js (chứa các settings cũ của ông)
+// Cấu hình Next.js
 const nextConfig: NextConfig = {
+  output: "export", // Quan trọng: Xuất ra file static để Electron có thể đọc
   images: {
+    unoptimized: true, // Bắt buộc khi dùng output export
     remotePatterns: [
       {
         protocol: "https",
@@ -24,7 +26,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Thêm các config khác ở đây nếu có (ví dụ: env, redirects...)
+  devIndicators: {
+    // @ts-ignore - Next.js 16 types might be missing this, but it works at runtime
+    appIsrStatus: false,
+  },
 };
 
 // Bọc cấu hình nextConfig bằng PWA

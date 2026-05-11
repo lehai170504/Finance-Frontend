@@ -6,6 +6,7 @@ import { QueryProvider } from "@/components/providers/query-provider";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthSyncProvider } from "@/components/providers/AuthSyncProvider";
+import { RouteGuard } from "@/components/providers/RouteGuard";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -43,21 +44,26 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
+      <body
+        className="min-h-full flex flex-col bg-background text-foreground font-sans"
+        suppressHydrationWarning
+      >
         <GoogleOAuthProvider
           clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
         >
           <QueryProvider>
             <AuthSyncProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-              >
-                <main>{children}</main>
-                <Toaster position="top-right" richColors closeButton />
-              </ThemeProvider>
+              <RouteGuard>
+                <ThemeProvider
+                  attribute="class"
+                  defaultTheme="system"
+                  enableSystem
+                  disableTransitionOnChange
+                >
+                  <main>{children}</main>
+                  <Toaster position="top-right" richColors closeButton />
+                </ThemeProvider>
+              </RouteGuard>
             </AuthSyncProvider>
           </QueryProvider>
         </GoogleOAuthProvider>

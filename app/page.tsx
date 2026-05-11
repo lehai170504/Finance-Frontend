@@ -46,8 +46,8 @@ export default function LandingPage() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-6 animate-pulse">
           <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-3xl animate-spin" />
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">
-            Homie Engine Starting...
+          <span className="text-[11px] font-bold tracking-[0.2em] text-primary">
+            Homie Engine đang khởi động...
           </span>
         </div>
       </div>
@@ -80,8 +80,8 @@ export default function LandingPage() {
             <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 transition-transform group-hover:rotate-12">
               <TrendingUp className="text-white size-6" strokeWidth={3} />
             </div>
-            <span className="font-black text-2xl tracking-tighter text-foreground uppercase">
-              HOMIE<span className="text-primary italic">.</span>
+            <span className="font-bold text-2xl tracking-tighter text-foreground">
+              Homie<span className="text-primary">.</span>
             </span>
           </Link>
 
@@ -90,7 +90,7 @@ export default function LandingPage() {
               <Link
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-all hover:translate-y-[-2px]"
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-all hover:translate-y-[-2px]"
               >
                 {item}
               </Link>
@@ -100,13 +100,13 @@ export default function LandingPage() {
           <div className="flex items-center gap-4">
             <Link
               href="/login"
-              className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-all hidden sm:block"
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-all hidden sm:block"
             >
               Đăng nhập
             </Link>
             <Button
               asChild
-              className="rounded-2xl px-8 h-12 font-black uppercase text-[10px] tracking-widest shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all"
+              className="rounded-2xl px-8 h-12 font-bold text-sm shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all"
             >
               <Link href="/register">Bắt đầu miễn phí</Link>
             </Button>
@@ -133,21 +133,21 @@ export default function LandingPage() {
             className="container mx-auto relative z-10"
           >
             <div className="flex flex-col items-center text-center space-y-12 mb-28">
-               <motion.div
+              <motion.div
                 variants={fadeUp}
-                className="inline-flex items-center gap-3 rounded-full bg-primary/5 backdrop-blur-2xl border border-primary/20 px-8 py-3 text-[11px] font-black tracking-[0.5em] text-primary uppercase shadow-2xl group cursor-default"
+                className="inline-flex items-center gap-3 rounded-full bg-primary/5 backdrop-blur-2xl border border-primary/20 px-8 py-3 text-xs font-bold tracking-widest text-primary shadow-2xl group cursor-default"
               >
                 <div className="w-2 h-2 bg-primary rounded-full animate-ping" />
-                <span className="group-hover:tracking-[0.6em] transition-all duration-500">The New Era of Personal Finance</span>
+                <span className="group-hover:tracking-[0.2em] transition-all duration-500">Kỷ nguyên quản trị tài chính mới</span>
               </motion.div>
 
               <motion.h1
                 variants={fadeUp}
-                className="text-7xl font-black tracking-[calc(-0.06em)] sm:text-8xl md:text-[11rem] lg:text-[13rem] leading-[0.8] text-foreground uppercase italic drop-shadow-2xl"
+                className="text-7xl font-bold tracking-[-0.04em] sm:text-8xl md:text-[11rem] lg:text-[13rem] leading-[0.9] text-foreground drop-shadow-2xl"
               >
-                ELITE <br />
+                Elite <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-emerald-500">
-                  HOMIE.
+                  Homie.
                 </span>
               </motion.h1>
 
@@ -155,28 +155,28 @@ export default function LandingPage() {
                 variants={fadeUp}
                 className="mx-auto max-w-3xl text-muted-foreground text-xl md:text-3xl font-medium leading-relaxed tracking-tight opacity-80 px-4"
               >
-                Trải nghiệm đỉnh cao quản trị dòng tiền. <br className="hidden md:block" /> 
+                Trải nghiệm đỉnh cao quản trị dòng tiền. <br className="hidden md:block" />
                 Chính xác. Bảo mật. Cá nhân hóa bởi AI.
               </motion.p>
 
-              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center gap-6">
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center gap-8">
                 <Button
                   asChild
                   size="lg"
-                  className="rounded-[2rem] px-12 h-18 font-black uppercase text-sm tracking-[0.2em] shadow-[0_20px_40px_-15px_rgba(var(--primary),0.5)] hover:scale-105 active:scale-95 transition-all bg-primary hover:bg-primary/90"
+                  className="rounded-[2rem] px-12 h-16 font-bold text-base shadow-[0_20px_40px_-15px_rgba(var(--primary),0.5)] hover:scale-105 active:scale-95 transition-all bg-primary hover:bg-primary/90"
                 >
                   <Link href="/register" className="flex items-center gap-4">
-                    Bắt đầu ngay <ArrowRight size={20} strokeWidth={3} />
+                    Bắt đầu ngay <ArrowRight size={20} strokeWidth={2.5} />
                   </Link>
                 </Button>
-                <Link href="#tinh-nang" className="text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground hover:text-primary transition-colors">
+                <Link href="#tinh-nang" className="text-sm font-bold text-muted-foreground hover:text-primary transition-colors">
                   Khám phá tính năng
                 </Link>
               </motion.div>
             </div>
 
             {/* BENTO GRID MOCKUP - PHẦN NÀY LÀM ĐIỂM NHẤN WOW */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -184,37 +184,37 @@ export default function LandingPage() {
               className="grid grid-cols-1 md:grid-cols-12 gap-6 max-w-7xl mx-auto"
             >
               <div className="md:col-span-8 h-[400px] rounded-[3rem] bg-gradient-to-br from-card to-muted/20 border-2 border-border/40 overflow-hidden relative group p-10">
-                 <div className="absolute top-0 right-0 p-10 opacity-20 group-hover:opacity-40 transition-opacity duration-700">
-                    <BarChart3 size={200} className="text-primary" />
-                 </div>
-                 <div className="relative z-10 flex flex-col justify-between h-full">
-                    <div className="space-y-4">
-                       <span className="px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-black uppercase rounded-full border border-primary/20">Dashboard v2.0</span>
-                       <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none">Trải nghiệm <br /> Quản trị 360 độ</h3>
+                <div className="absolute top-0 right-0 p-10 opacity-20 group-hover:opacity-40 transition-opacity duration-700">
+                  <BarChart3 size={200} className="text-primary" />
+                </div>
+                <div className="relative z-10 flex flex-col justify-between h-full">
+                  <div className="space-y-4">
+                    <span className="px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-bold rounded-full border border-primary/20">Dashboard v2.0</span>
+                    <h3 className="text-4xl md:text-5xl font-bold tracking-tighter leading-tight">Trải nghiệm <br /> Quản trị 360 độ</h3>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center text-emerald-500 border border-emerald-500/30">
+                      <TrendingUp size={24} />
                     </div>
-                    <div className="flex gap-4">
-                       <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center text-emerald-500 border border-emerald-500/30">
-                          <TrendingUp size={24} />
-                       </div>
-                       <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-blue-500 border border-blue-500/30">
-                          <PieChart size={24} />
-                       </div>
+                    <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-blue-500 border border-blue-500/30">
+                      <PieChart size={24} />
                     </div>
-                 </div>
-                 {/* Giả lập Dashboard UI mờ ảo */}
-                 <div className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[90%] h-[200px] bg-background/40 backdrop-blur-3xl rounded-t-[2rem] border-x-2 border-t-2 border-primary/10 shadow-2xl" />
+                  </div>
+                </div>
+                {/* Giả lập Dashboard UI mờ ảo */}
+                <div className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[90%] h-[200px] bg-background/40 backdrop-blur-3xl rounded-t-[2rem] border-x-2 border-t-2 border-primary/10 shadow-2xl" />
               </div>
 
               <div className="md:col-span-4 h-[400px] rounded-[3rem] bg-primary border-2 border-primary/40 p-10 flex flex-col justify-between text-white overflow-hidden relative group">
                 <div className="absolute top-[-10%] right-[-10%] opacity-20 animate-spin-slow">
-                   <BrainCircuit size={250} />
+                  <BrainCircuit size={250} />
                 </div>
                 <div className="relative z-10">
-                   <Sparkles size={48} className="mb-6 fill-white" />
-                   <h3 className="text-4xl font-black uppercase tracking-tighter leading-none mb-6">AI <br /> Financial <br /> Advisor</h3>
-                   <p className="text-white/70 text-sm font-medium leading-relaxed uppercase tracking-widest italic">Personalized Insight <br /> for every homie.</p>
+                  <Sparkles size={48} className="mb-6 fill-white" />
+                  <h3 className="text-4xl font-bold tracking-tighter leading-tight mb-6">AI <br /> Financial <br /> Advisor</h3>
+                  <p className="text-white/70 text-sm font-medium leading-relaxed tracking-wide">Cá nhân hóa thông tin <br /> dành riêng cho bạn.</p>
                 </div>
-                <Button className="bg-white text-primary hover:bg-white/90 rounded-2xl h-14 font-black uppercase tracking-widest text-[11px] shadow-2xl relative z-10">
+                <Button className="bg-white text-primary hover:bg-white/90 rounded-2xl h-14 font-bold text-sm shadow-2xl relative z-10">
                   Thử ngay
                 </Button>
               </div>
@@ -242,7 +242,7 @@ export default function LandingPage() {
                 <p className="text-4xl md:text-5xl font-black tracking-tighter text-primary font-money">
                   {stat.value}
                 </p>
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground/60 text-balance">
+                <p className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground/60 text-balance">
                   {stat.label}
                 </p>
               </motion.div>
@@ -263,10 +263,10 @@ export default function LandingPage() {
               variants={fadeUp}
               className="text-center mb-32 space-y-6"
             >
-              <h2 className="text-sm font-black uppercase tracking-[0.5em] text-primary">
+              <h2 className="text-sm font-bold tracking-[0.3em] text-primary">
                 Hành trình trải nghiệm
               </h2>
-              <p className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none">
+              <p className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
                 Chỉ 3 phút để làm chủ <br className="hidden md:block" /> vận
                 mệnh tài chính
               </p>
@@ -307,10 +307,10 @@ export default function LandingPage() {
                     {item.icon}
                   </div>
                   <div className="space-y-4">
-                    <span className="text-[11px] font-black text-primary uppercase tracking-[0.4em] opacity-40 italic">
+                    <span className="text-xs font-bold text-primary tracking-widest opacity-40">
                       {item.step}
                     </span>
-                    <h3 className="text-2xl font-black uppercase tracking-tight group-hover:text-primary transition-colors">
+                    <h3 className="text-2xl font-bold tracking-tight group-hover:text-primary transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-muted-foreground text-sm font-medium leading-relaxed max-w-[300px]">
@@ -342,7 +342,7 @@ export default function LandingPage() {
                     <Zap className="fill-white size-8" />
                   </div>
                   <div className="space-y-4">
-                    <h3 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
+                    <h3 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[0.95]">
                       Báo cáo <br /> Thời gian thực.
                     </h3>
                     <p className="text-background/50 max-w-md text-lg font-medium">
@@ -352,7 +352,7 @@ export default function LandingPage() {
                   </div>
                   <Button
                     variant="outline"
-                    className="w-fit rounded-full border-background/20 text-background hover:bg-background hover:text-foreground uppercase text-[10px] font-black px-10 h-14 tracking-widest"
+                    className="w-fit rounded-full border-background/20 text-background hover:bg-background hover:text-foreground text-xs font-bold px-10 h-14"
                   >
                     Trải nghiệm ngay
                   </Button>
@@ -372,7 +372,7 @@ export default function LandingPage() {
                     strokeWidth={2.5}
                   />
                   <div>
-                    <h4 className="text-2xl font-black uppercase tracking-tight mb-3 text-balance">
+                    <h4 className="text-2xl font-bold tracking-tight mb-3 text-balance">
                       Nhật ký thay đổi
                     </h4>
                     <p className="text-muted-foreground group-hover:text-white/80 text-sm font-medium leading-relaxed">
@@ -394,7 +394,7 @@ export default function LandingPage() {
                     strokeWidth={2.5}
                   />
                   <div>
-                    <h4 className="text-2xl font-black uppercase tracking-tight mb-3 text-balance">
+                    <h4 className="text-2xl font-bold tracking-tight mb-3 text-balance">
                       Hạn mức thông minh
                     </h4>
                     <p className="text-muted-foreground text-sm font-medium leading-relaxed">
@@ -420,11 +420,11 @@ export default function LandingPage() {
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2" />
 
             <div className="flex-1 space-y-12 relative z-10 text-center lg:text-left">
-              <div className="inline-flex items-center gap-3 text-primary font-black uppercase tracking-[0.4em] text-[11px] bg-primary/10 px-5 py-2 rounded-full border border-primary/20 animate-pulse">
+              <div className="inline-flex items-center gap-3 text-primary font-bold tracking-widest text-[11px] bg-primary/10 px-5 py-2 rounded-full border border-primary/20 animate-pulse">
                 <ShieldCheck size={16} /> Tiêu chuẩn bảo mật cao cấp
               </div>
-              <h2 className="text-6xl md:text-9xl font-black tracking-[calc(-0.04em)] text-background leading-[0.8] uppercase italic">
-                DỮ LIỆU <br /> BẤT KHẢ XÂM.
+              <h2 className="text-6xl md:text-9xl font-bold tracking-[-0.04em] text-background leading-[0.9]">
+                Dữ liệu <br /> Bất khả xâm.
               </h2>
               <div className="grid gap-8">
                 {[
@@ -438,7 +438,7 @@ export default function LandingPage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.2 + 0.5 }}
-                    className="flex items-center justify-center lg:justify-start gap-5 text-background/90 font-black uppercase text-[13px] tracking-widest"
+                    className="flex items-center justify-center lg:justify-start gap-5 text-background/90 font-bold text-[13px] tracking-wide"
                   >
                     <CheckCircle2
                       className="text-primary size-7"
@@ -474,15 +474,15 @@ export default function LandingPage() {
                   <TrendingUp className="text-white size-8" strokeWidth={3} />
                 </div>
                 <div className="flex flex-col leading-none">
-                  <span className="font-black text-4xl tracking-tighter text-foreground uppercase">
-                    HOMIE<span className="text-primary italic">.</span>
+                  <span className="font-bold text-4xl tracking-tighter text-foreground">
+                    Homie<span className="text-primary">.</span>
                   </span>
-                  <span className="text-[10px] font-black tracking-[0.5em] uppercase text-muted-foreground mt-1 text-balance">
+                  <span className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground mt-1 text-balance">
                     Core Finance
                   </span>
                 </div>
               </Link>
-              <p className="text-muted-foreground font-medium max-w-sm leading-relaxed text-xl tracking-tight italic text-balance">
+              <p className="text-muted-foreground font-medium max-w-sm leading-relaxed text-lg tracking-tight text-balance">
                 "Chúng tôi không chỉ xây dựng công cụ, chúng tôi xây dựng sự an
                 tâm cho tương lai tài chính của bạn."
               </p>
@@ -501,7 +501,7 @@ export default function LandingPage() {
                       size={26}
                       className="text-muted-foreground group-hover:text-primary transition-colors"
                     />
-                    <span className="absolute -top-12 left-1/2 -translate-x-1/2 bg-foreground text-background text-[10px] font-black px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-all uppercase tracking-widest whitespace-nowrap shadow-2xl">
+                    <span className="absolute -top-12 left-1/2 -translate-x-1/2 bg-foreground text-background text-[11px] font-bold px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-all tracking-wider whitespace-nowrap shadow-2xl">
                       {item.label} System
                     </span>
                   </div>
@@ -539,10 +539,10 @@ export default function LandingPage() {
               },
             ].map((group) => (
               <div key={group.title} className="space-y-10">
-                <h5 className="font-black uppercase tracking-[0.4em] text-xs text-foreground border-b border-border/40 pb-5">
+                <h5 className="font-bold tracking-widest text-xs text-foreground border-b border-border/40 pb-5">
                   {group.title}
                 </h5>
-                <ul className="space-y-5 text-[13px] font-bold text-muted-foreground uppercase tracking-tight">
+                <ul className="space-y-5 text-[13px] font-medium text-muted-foreground tracking-tight">
                   {group.links.map((link) => (
                     <li key={link}>
                       <Link
@@ -564,17 +564,17 @@ export default function LandingPage() {
 
           <div className="border-t border-border/40 pt-12 flex flex-col md:flex-row items-center justify-between gap-10 text-balance">
             <div className="space-y-2 text-center md:text-left">
-              <p className="text-[11px] font-black uppercase tracking-[0.4em] text-muted-foreground/50">
-                HOMIE FINANCE GLOBAL © 2026. ALL RIGHTS RESERVED.
+              <p className="text-[11px] font-bold text-muted-foreground/50 tracking-wide">
+                Homie Finance Global © 2026. All rights reserved.
               </p>
-              <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">
-                CRAFTED WITH PASSION BY LE HAI — DESIGNED FOR THE ELITE.
+              <p className="text-[10px] font-medium text-muted-foreground/30 tracking-tight">
+                Crafted with passion by Le Hai — Designed for the elite.
               </p>
             </div>
 
             <div className="flex items-center gap-4 bg-muted/50 px-8 py-4 rounded-[2rem] border border-border/50 shadow-inner">
               <div className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.6)]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground">
+              <span className="text-[11px] font-bold text-muted-foreground">
                 Hệ thống: Vận hành ổn định
               </span>
             </div>

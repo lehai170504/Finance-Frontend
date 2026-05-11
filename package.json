@@ -2,11 +2,29 @@
   "name": "homie-finance-fe",
   "version": "0.1.0",
   "private": true,
+  "main": "main/main.js",
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "electron-dev": "electron .",
+    "electron-build": "next build && electron-builder"
+  },
+  "build": {
+    "appId": "com.homiefinance.app",
+    "productName": "Homie Finance",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main/**/*",
+      "out/**/*"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "public/favicon.ico"
+    }
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.9",
@@ -40,6 +58,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "electron": "^42.0.1",
+    "electron-builder": "^26.8.1",
+    "electron-is-dev": "^3.0.1",
+    "electron-serve": "^3.0.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
     "tailwindcss": "^4",

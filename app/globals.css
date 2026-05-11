@@ -67,8 +67,32 @@
   html,
   body {
     @apply overflow-x-hidden w-full max-w-[100vw];
-    scrollbar-gutter: stable;
-    overflow-y: scroll;
+    height: 100%;
+  }
+
+  html {
+    overflow: hidden; /* Chặn thanh cuộn ngoài cùng */
+  }
+
+  body {
+    overflow-y: auto; /* Chỉ cho phép thanh cuộn ở body */
+    scrollbar-width: thin;
+    scrollbar-color: oklch(var(--primary) / 0.2) transparent;
+  }
+
+  /* 🎨 Làm mượt thanh cuộn cho Electron (Webkit) */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--primary) / 0.1);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--primary) / 0.3);
   }
 
   body {
