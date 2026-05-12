@@ -1,20 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
-import { aiService } from "@/services/ai.service";
-import { toast } from "sonner";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { aiService, AiChatMessage } from "@/services/ai.service";
 
-export const useAi = () => {
-  return useQuery({
-    queryKey: ["ai_advice"],
-    queryFn: async () => {
-      try {
-        return await aiService.getFinancialAdvice();
-      } catch (error) {
-        toast.error("Không thể kết nối với Cố vấn AI. Vui lòng thử lại sau!");
-        throw error;
-      }
-    },
-    staleTime: 1000 * 60 * 60, // Giữ lời khuyên trong 1 giờ
-    retry: false,
-    refetchOnWindowFocus: false,
+export const useFinancialAdvice = () => {
+  return useQuery<string, Error>({
+    queryKey: ["ai", "advice"],
+    queryFn: aiService.getFinancialAdvice,
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
+  });
+};
+
+export const useAiChat = () => {
+  return useMutation<
+    string,
+    Error,
+    {
+      message: string;
+      history?: AiChatMessage[];
+    }
+  >({
+    mutationFn: ({ message, history }) => aiService.chat(message, history || []),
   });
 };

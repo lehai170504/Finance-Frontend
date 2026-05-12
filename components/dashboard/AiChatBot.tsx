@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { BrainCircuit, X, Send, Bot, User, MessageCircle } from "lucide-react";
-import { aiService } from "@/services/ai.service";
+import { useEffect, useRef, useState } from "react";
+import { Bot, BrainCircuit, MessageCircle, Send, User, X } from "lucide-react";
+import { aiService, AiChatMessage } from "@/services/ai.service";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -10,115 +10,184 @@ interface Message {
   content: string;
 }
 
+const INITIAL_MESSAGE: Message = {
+  role: "ai",
+  content:
+    "Chào homie! Tôi là Trợ lý tài chính AI. Bạn cần tôi tư vấn gì không?",
+};
+
 export function AiChatBot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "ai", content: "Chào homie! Tôi là Trợ lý tài chính AI. Bạn cần tôi tư vấn gì không?" }
-  ]);
+  const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages]);
+    if (!scrollRef.current) return;
+
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  }, [messages, isLoading]);
+
+  const buildChatHistory = (currentMessages: Message[]): AiChatMessage[] => {
+    return currentMessages.map((message) => ({
+      role: message.role === "ai" ? "assistant" : "user",
+      content: message.content,
+    }));
+  };
 
   const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+    const userMessage = input.trim();
 
-    const userMsg = input.trim();
-    const chatHistory = messages.map(m => ({
-      role: m.role === "ai" ? "model" : "user",
-      content: m.content
-    }));
+    if (!userMessage || isLoading) return;
+
+    const history = buildChatHistory(messages);
 
     setInput("");
-    setMessages(prev => [...prev, { role: "user", content: userMsg }]);
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
 
     try {
-      const res = await aiService.chat(userMsg, chatHistory);
-      setMessages(prev => [...prev, { role: "ai", content: res.data }]);
+      const aiAnswer = await aiService.chat(userMessage, history);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "ai",
+          content: aiAnswer || "AI chưa có phản hồi rõ ràng homie ơi.",
+        },
+      ]);
     } catch (error) {
-      setMessages(prev => [...prev, { role: "ai", content: "Lỗi rồi homie ơi, tôi không kết nối được với bộ não trung tâm!" }]);
+      console.error("AI chat error:", error);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "ai",
+          content:
+            "Lỗi rồi homie ơi, tôi không kết nối được với bộ não trung tâm!",
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
+  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== "Enter") return;
+
+    event.preventDefault();
+    handleSend();
+  };
+
   return (
-    <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-end">
-      {/* KHUNG CHAT */}
+    <div className="fixed bottom-8 right-8 z-100 flex flex-col items-end">
       {isOpen && (
-        <div className="mb-4 w-[350px] md:w-[400px] h-[500px] bg-background border-2 border-primary/20 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
-          {/* Header */}
-          <div className="p-5 bg-primary text-white flex items-center justify-between">
+        <div className="mb-4 flex h-125 w-87.5 flex-col overflow-hidden rounded-4xl border-2 border-primary/20 bg-background shadow-2xl animate-in slide-in-from-bottom-10 fade-in duration-300 md:w-100">
+          <div className="flex items-center justify-between bg-primary p-5 text-white">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-white/20 rounded-xl">
+              <div className="rounded-xl bg-white/20 p-2">
                 <BrainCircuit size={20} />
               </div>
+
               <div>
-                <h3 className="text-sm font-black uppercase tracking-tight">Homie AI Advisor</h3>
+                <h3 className="text-sm font-black uppercase tracking-tight">
+                  Homie AI Advisor
+                </h3>
+
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                  <span className="text-[9px] font-bold opacity-80 uppercase tracking-widest">Đang trực tuyến</span>
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+                  <span className="text-[9px] font-bold uppercase tracking-widest opacity-80">
+                    Đang trực tuyến
+                  </span>
                 </div>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="hover:rotate-90 transition-transform">
+
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="transition-transform hover:rotate-90"
+              aria-label="Đóng chat AI"
+            >
               <X size={20} />
             </button>
           </div>
 
-          {/* Messages Area */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-5 space-y-4 bg-muted/20 scrollbar-thin">
-            {messages.map((msg, idx) => (
-              <div key={idx} className={cn("flex gap-3", msg.role === "user" ? "flex-row-reverse" : "")}>
-                <div className={cn(
-                  "w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow-sm",
-                  msg.role === "ai" ? "bg-primary text-white" : "bg-muted text-muted-foreground"
-                )}>
-                  {msg.role === "ai" ? <Bot size={16} /> : <User size={16} />}
+          <div
+            ref={scrollRef}
+            className="scrollbar-thin flex-1 space-y-4 overflow-y-auto bg-muted/20 p-5"
+          >
+            {messages.map((message, index) => (
+              <div
+                key={`${message.role}-${index}`}
+                className={cn(
+                  "flex gap-3",
+                  message.role === "user" && "flex-row-reverse"
+                )}
+              >
+                <div
+                  className={cn(
+                    "flex h-8 w-8 shrink-0 items-center justify-center rounded-xl shadow-sm",
+                    message.role === "ai"
+                      ? "bg-primary text-white"
+                      : "bg-muted text-muted-foreground"
+                  )}
+                >
+                  {message.role === "ai" ? (
+                    <Bot size={16} />
+                  ) : (
+                    <User size={16} />
+                  )}
                 </div>
-                <div className={cn(
-                  "p-4 rounded-2xl text-xs font-medium leading-relaxed max-w-[80%] shadow-sm",
-                  msg.role === "ai" ? "bg-white border border-border/40 text-foreground" : "bg-primary text-white"
-                )}>
-                  {msg.content}
+
+                <div
+                  className={cn(
+                    "max-w-[80%] rounded-2xl p-4 text-xs font-medium leading-relaxed shadow-sm",
+                    message.role === "ai"
+                      ? "border border-border/40 bg-white text-foreground"
+                      : "bg-primary text-white"
+                  )}
+                >
+                  {message.content}
                 </div>
               </div>
             ))}
+
             {isLoading && (
               <div className="flex gap-3">
-                <div className="w-8 h-8 rounded-xl bg-primary text-white flex items-center justify-center animate-bounce">
+                <div className="flex h-8 w-8 animate-bounce items-center justify-center rounded-xl bg-primary text-white">
                   <Bot size={16} />
                 </div>
-                <div className="p-4 rounded-2xl bg-white border border-border/40 flex gap-1 items-center">
-                  <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce" />
-                  <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:0.2s]" />
-                  <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:0.4s]" />
+
+                <div className="flex items-center gap-1 rounded-2xl border border-border/40 bg-white p-4">
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/40" />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/40 [animation-delay:0.2s]" />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/40 [animation-delay:0.4s]" />
                 </div>
               </div>
             )}
           </div>
 
-          {/* Input Area */}
-          <div className="p-4 border-t border-border/40 bg-background">
+          <div className="border-t border-border/40 bg-background p-4">
             <div className="relative">
               <input
                 type="text"
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={handleInputKeyDown}
                 placeholder="Hỏi AI bất cứ điều gì..."
-                className="w-full pl-5 pr-12 py-3.5 bg-muted/40 border-2 border-transparent focus:border-primary/20 focus:bg-background rounded-2xl text-sm transition-all outline-none"
+                className="w-full rounded-2xl border-2 border-transparent bg-muted/40 py-3.5 pl-5 pr-12 text-sm outline-none transition-all focus:border-primary/20 focus:bg-background"
+                disabled={isLoading}
               />
+
               <button
+                type="button"
                 onClick={handleSend}
                 disabled={!input.trim() || isLoading}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-primary hover:bg-primary/10 rounded-xl transition-all disabled:opacity-30"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl p-2 text-primary transition-all hover:bg-primary/10 disabled:opacity-30"
+                aria-label="Gửi tin nhắn"
               >
                 <Send size={18} />
               </button>
@@ -127,19 +196,26 @@ export function AiChatBot() {
         </div>
       )}
 
-      {/* NÚT BẤM MỞ CHAT */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
         className={cn(
-          "w-16 h-16 rounded-[1.8rem] flex items-center justify-center text-white shadow-2xl transition-all duration-500 hover:scale-110 active:scale-95 group relative",
-          isOpen ? "bg-rose-500 rotate-90" : "bg-primary"
+          "group relative flex h-16 w-16 items-center justify-center rounded-[1.8rem] text-white shadow-2xl transition-all duration-500 hover:scale-110 active:scale-95",
+          isOpen ? "rotate-90 bg-rose-500" : "bg-primary"
         )}
+        aria-label={isOpen ? "Đóng chat AI" : "Mở chat AI"}
       >
-        {isOpen ? <X size={28} strokeWidth={3} /> : (
+        {isOpen ? (
+          <X size={28} strokeWidth={3} />
+        ) : (
           <>
-            <MessageCircle size={28} strokeWidth={2.5} className="group-hover:animate-bounce" />
-            <span className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 border-4 border-background rounded-full animate-ping" />
-            <span className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 border-4 border-background rounded-full" />
+            <MessageCircle
+              size={28}
+              strokeWidth={2.5}
+              className="group-hover:animate-bounce"
+            />
+            <span className="absolute -right-1 -top-1 h-5 w-5 animate-ping rounded-full border-4 border-background bg-rose-500" />
+            <span className="absolute -right-1 -top-1 h-5 w-5 rounded-full border-4 border-background bg-rose-500" />
           </>
         )}
       </button>
