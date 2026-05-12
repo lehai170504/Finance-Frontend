@@ -7,6 +7,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthSyncProvider } from "@/components/providers/AuthSyncProvider";
 import { RouteGuard } from "@/components/providers/RouteGuard";
+import { WelcomeModalProvider } from "@/components/providers/WelcomeModalProvider";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -21,9 +22,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Homie Finance | Quản lý tài chính tinh gọn",
+  title: "WealthTrack | Professional Wealth Management",
   description:
-    "Hệ thống quản lý chi tiêu cá nhân tối giản, tốc độ cao và bảo mật tuyệt đối.",
+    "Professional wealth tracking and financial management platform with real-time analytics.",
   manifest: "/manifest.json",
   icons: {
     icon: [
@@ -53,8 +54,9 @@ export default function RootLayout({
         >
           <QueryProvider>
             <AuthSyncProvider>
-              <RouteGuard>
-                <ThemeProvider
+              <WelcomeModalProvider>
+                <RouteGuard>
+                  <ThemeProvider
                   attribute="class"
                   defaultTheme="system"
                   enableSystem
@@ -64,7 +66,8 @@ export default function RootLayout({
                   <Toaster position="top-right" richColors closeButton />
                 </ThemeProvider>
               </RouteGuard>
-            </AuthSyncProvider>
+            </WelcomeModalProvider>
+          </AuthSyncProvider>
           </QueryProvider>
         </GoogleOAuthProvider>
       </body>

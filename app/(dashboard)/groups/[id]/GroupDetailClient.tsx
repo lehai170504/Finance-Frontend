@@ -61,7 +61,7 @@ export default function GroupDetailClient() {
   const handleCopyCode = () => {
     if (currentGroup?.inviteCode) {
       navigator.clipboard.writeText(currentGroup.inviteCode);
-      toast.success("Đã sao chép mã nhóm! Gửi cho đồng đội ngay nhé");
+      toast.success("Đã sao chép mã nhóm! Chia sẻ với thành viên khác nhé");
     }
   };
 

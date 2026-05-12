@@ -21,7 +21,7 @@ function createWindow() {
       preload: path.join(__dirname, "preload.js"),
     },
     icon: path.join(__dirname, "../public/icon.png"),
-    title: "Homie Finance",
+    title: "WealthTrack",
     // Giả lập User Agent của Chrome để Google cho phép đăng nhập
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
   });

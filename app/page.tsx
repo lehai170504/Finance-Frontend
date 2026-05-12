@@ -47,7 +47,7 @@ export default function LandingPage() {
         <div className="flex flex-col items-center gap-6 animate-pulse">
           <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-3xl animate-spin" />
           <span className="text-[11px] font-bold tracking-[0.2em] text-primary">
-            Homie Engine đang khởi động...
+            WealthTrack Engine đang khởi động...
           </span>
         </div>
       </div>
@@ -147,7 +147,7 @@ export default function LandingPage() {
               >
                 Elite <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-emerald-500">
-                  Homie.
+                  WealthTrack.
                 </span>
               </motion.h1>
 
@@ -475,10 +475,10 @@ export default function LandingPage() {
                 </div>
                 <div className="flex flex-col leading-none">
                   <span className="font-bold text-4xl tracking-tighter text-foreground">
-                    Homie<span className="text-primary">.</span>
+                    WealthTrack<span className="text-primary">.</span>
                   </span>
                   <span className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground mt-1 text-balance">
-                    Core Finance
+                    WealthTrack
                   </span>
                 </div>
               </Link>
@@ -565,7 +565,7 @@ export default function LandingPage() {
           <div className="border-t border-border/40 pt-12 flex flex-col md:flex-row items-center justify-between gap-10 text-balance">
             <div className="space-y-2 text-center md:text-left">
               <p className="text-[11px] font-bold text-muted-foreground/50 tracking-wide">
-                Homie Finance Global © 2026. All rights reserved.
+                WealthTrack Global © 2026. All rights reserved.
               </p>
               <p className="text-[10px] font-medium text-muted-foreground/30 tracking-tight">
                 Crafted with passion by Le Hai — Designed for the elite.

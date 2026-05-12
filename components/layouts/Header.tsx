@@ -120,10 +120,10 @@ export function Header() {
                       </div>
                       <div className="flex flex-col">
                         <span className="font-black text-xl tracking-tighter uppercase leading-none">
-                          Homie.
+                          WealthTrack.
                         </span>
                         <span className="text-[8px] font-black tracking-[0.3em] uppercase text-muted-foreground">
-                          Finance
+                          WealthTrack
                         </span>
                       </div>
                     </SheetTitle>
@@ -161,7 +161,7 @@ export function Header() {
             <div className="relative w-10 h-10 transition-transform duration-500 group-hover:rotate-[360deg]">
               <Image
                 src="/logo-icon.png"
-                alt="Homie"
+                alt="WealthTrack"
                 fill
                 className="object-contain"
                 priority
@@ -169,10 +169,10 @@ export function Header() {
             </div>
             <div className="hidden sm:flex flex-col leading-none pt-1">
               <span className="font-black text-2xl tracking-tighter uppercase text-foreground">
-                HOMIE<span className="text-primary">.</span>
+                WealthTrack<span className="text-primary">.</span>
               </span>
               <span className="text-[9px] font-black tracking-[0.3em] uppercase text-muted-foreground ml-0.5">
-                Finance
+                Wealth Manager
               </span>
             </div>
           </Link>
@@ -241,7 +241,7 @@ export function Header() {
 
                     <div className="hidden md:flex flex-col items-start leading-none text-left">
                       <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-                        Homie
+                        WealthTrack
                       </span>
                       <span className="text-xs font-bold text-foreground flex items-center gap-1">
                         {user.username}{" "}

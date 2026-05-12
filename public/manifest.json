@@ -1,7 +1,7 @@
 {
-  "name": "Homie Finance",
-  "short_name": "Homie",
-  "description": "Quản lý tài chính cá nhân và nhóm siêu mượt",
+  "name": "WealthTrack",
+  "short_name": "WealthTrack",
+  "description": "Professional wealth tracking and financial management",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

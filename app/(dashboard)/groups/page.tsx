@@ -29,7 +29,7 @@ export default function GroupsPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) {
-      toast.error("Nhập thông tin đã homie ơi!");
+      toast.error("Vui lòng nhập thông tin!");
       return;
     }
     
@@ -44,7 +44,7 @@ export default function GroupsPage() {
       joinGroup.mutate(inputValue, { 
         onSuccess: () => {
           setInputValue("");
-          toast.success("Chào mừng homie đã gia nhập nhóm! 🤝");
+          toast.success("Chào mừng bạn đã gia nhập nhóm! 🤝");
         }
       });
     }
@@ -166,7 +166,7 @@ export default function GroupsPage() {
               <Users size={80} strokeWidth={1} />
             </div>
             <div className="space-y-3">
-              <p className="text-2xl font-black uppercase tracking-tight text-muted-foreground/60">Homie chưa có nhóm nào</p>
+              <p className="text-2xl font-black uppercase tracking-tight text-muted-foreground/60">Bạn chưa có nhóm nào</p>
               <p className="text-sm text-muted-foreground/40 font-medium max-w-sm mx-auto">
                 Hãy bắt đầu bằng cách tạo một nhóm mới hoặc xin mã mời từ bạn bè để cùng nhau quản lý nhé!
               </p>
@@ -197,7 +197,7 @@ export default function GroupsPage() {
         description={
           selectedGroup?.isOwner
             ? "Cảnh báo: Mọi dữ liệu giao dịch và lịch sử trong nhóm sẽ bị xóa sạch khỏi hệ thống. Hành động này không thể khôi phục."
-            : "Bạn sẽ không thể tiếp tục theo dõi thu chi chung của nhóm sau khi rời đi. Homie chắc chứ?"
+            : "Bạn sẽ không thể tiếp tục theo dõi thu chi chung của nhóm sau khi rời đi. Bạn chắc chứ?"
         }
         confirmText={selectedGroup?.isOwner ? "GIẢI TÁN NGAY" : "RỜI KHÔNG GIAN"}
         isLoading={deleteGroup.isPending || leaveGroup.isPending}
